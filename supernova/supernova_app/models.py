@@ -1,5 +1,5 @@
 from django.db import models
-
+import uuid
 
 class RawRequestLog(models.Model):
 	request_uuid = models.UUIDField(primary_key=True)
@@ -44,7 +44,7 @@ class PacketEvent(models.Model):
 		db_table = 'supernova_packet_event'
 	
 class PacketEventHotspot(models.Model):
-	id = models.UUIDField(primary_key=True, auto_created=True)
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
 	# one-to-many relationship with PacketEvent (one packet can have many hotspots)
 	request_uuid = models.ForeignKey(PacketEvent, on_delete=models.CASCADE, db_column='request_uuid')

@@ -5,7 +5,7 @@ FROM python:3.11-slim-bookworm
 RUN echo "Etc/UTC" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
 
 # set variables
-ENV DJANGO_DEBUG False
+ENV DJANGO_DEBUG 0
 
 # install nginx
 RUN apt-get update && apt-get install nginx vim git nano -y --no-install-recommends

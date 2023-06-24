@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Packet Metadata</title>
+</head>
+<body>
+    <h1>Packet Metadata</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Packet ID</th>
+                <th>App EUI</th>
+                <th>Device EUI</th>
+                <!-- Add more fields here as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for packet in packets %}
+                <tr>
+                    <td>{{ packet.id }}</td>
+                    <td>{{ packet.app_eui }}</td>
+                    <td>{{ packet.dev_eui }}</td>
+                    <!-- Add more fields here as needed -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

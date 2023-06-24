@@ -21,6 +21,7 @@ class PacketEvent(models.Model):
 	downlink_url = models.URLField()
 	fcnt = models.IntegerField()
 	id = models.UUIDField()
+	hotspot_count = models.IntegerField()
 	metadata_adr_allowed = models.BooleanField()
 	metadata_cf_list_enabled = models.BooleanField()
 	metadata_multi_buy = models.IntegerField()

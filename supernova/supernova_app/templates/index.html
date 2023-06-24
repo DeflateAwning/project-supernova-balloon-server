@@ -1,0 +1,21 @@
+{% load humanize %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simple HTML Page</title>
+</head>
+<body>
+	<h1>Welcome to the {{ app_name }} App!</h1>
+	<p>This is a simple HTML page.</p>
+
+	<h2>Basic Stats</h2>
+	{% load humanize %}
+
+	<p>Number of RawRequestLog objects: {{ raw_request_log_count|intcomma }}</p>
+	<p>Number of PacketEventHotspot objects: {{ packet_event_hotspot_count|intcomma }}</p>
+	<p>Number of PacketEvent objects: {{ packet_event_count|intcomma }}</p>
+
+
+</body>
+</html>

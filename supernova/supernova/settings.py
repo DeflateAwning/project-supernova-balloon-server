@@ -24,6 +24,8 @@ env = environ.Env(
     DB_PASSWORD=(str, ''),
     DB_HOST=(str, ''),
     DB_PORT=(int, 3050),
+    HELIUM_HEADER_SECRET=(str, ''),
+    DJANGO_DEBUG=(bool, False),
 )
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
@@ -34,7 +36,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DJANGO_DEBUG')
 
 ALLOWED_HOSTS = []
 

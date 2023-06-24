@@ -4,4 +4,7 @@ django==4.2.2
 #django-firebird==2.2.1
 django-environ==0.10.0
 
-git+https://github.com/NishiyamaPedro/django-firebird.git@e8c9acd#egg=django-firebird
+#git+https://github.com/NishiyamaPedro/django-firebird.git@e8c9acd#egg=django-firebird
+
+gunicorn~=20.1.0
+

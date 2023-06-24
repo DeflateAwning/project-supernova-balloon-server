@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from supernova_app.views import index
+from supernova_app.views import index, api_v1_process_incoming_helium_packet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +28,6 @@ urlpatterns = [
 
 
     # API
+    path('api/v1/process_incoming_helium_packet', api_v1_process_incoming_helium_packet, name='process_incoming_helium_packet')
 ]
 

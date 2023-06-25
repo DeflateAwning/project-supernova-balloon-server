@@ -21,15 +21,17 @@ export DJANGE_DEBUG=True
 
 docker pull docker pull mariadb:10.11 # maybe optional
 
-docker run --name mariadb_supernova -e MYSQL_ROOT_PASSWORD=SOME_PASSWORD_HERE -p 3306:3306 -d docker.io/library/mariadb:10.11
+docker run --name mariadb_supernova --restart=unless-stopped -e MYSQL_ROOT_PASSWORD=SOME_PASSWORD_HERE -p 3306:3306 -d docker.io/library/mariadb:10.11
 
 ```
 
 ## Build and Run Web App
 ```bash
-docker build -t supernova .
-docker run -d -p 8020:8020 --name supernova supernova
-docker run -d -p 8020:8020 -e DJANGO_DEBUG=1 --name supernova supernova # debug mode
+docker build -t supernova . --no-cache
+docker run -d -p 8020:8020 --restart=unless-stopped --name supernova supernova
+docker run -d -p 8020:8020 --restart=unless-stopped -e DJANGO_DEBUG=1 --name supernova supernova # debug mode
+
+docker stop supernova && docker rm supernova
 ```
 
 ## Ports

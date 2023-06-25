@@ -8,10 +8,10 @@ RUN echo "Etc/UTC" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
 ENV DJANGO_DEBUG 0
 
 # install deps
-RUN apt-get update && apt-get install nginx vim git nano pkg-config default-libmysqlclient-dev build-essential -y
+RUN apt-get update && apt-get install build-essential nginx vim git nano pkg-config default-libmysqlclient-dev -y
+# build-essential: good to have, maybe helpful for Python mysql
 # pkg-config: required for a Python mysql package
 # default-libmysqlclient-dev: required for a Python mysql package
-# build-essential: good to have, maybe helpful for Python mysql
 
 # configure nginx
 COPY nginx.default /etc/nginx/sites-available/default

@@ -41,7 +41,7 @@ DEBUG = env('DJANGO_DEBUG')
 print(f"Settings.DEBUG: {DEBUG}")
 
 # restrict hosts coming from outside the local machine Nginx
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost'] + (env('ALLOWED_HOSTS').split(',') if env('ALLOWED_HOSTS') else [])
 
 # Application definition
 

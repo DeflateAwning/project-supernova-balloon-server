@@ -40,7 +40,8 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DJANGO_DEBUG')
 print(f"Settings.DEBUG: {DEBUG}")
 
-ALLOWED_HOSTS = ['127.0.0.1']
+# restrict hosts coming from outside the local machine Nginx
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -90,10 +91,20 @@ WSGI_APPLICATION = 'supernova.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
+	# 'default': {
+	# 	'ENGINE': 'django.db.backends.sqlite3',
+	# 	'NAME': BASE_DIR / 'db.sqlite3',
+	# },
+
 	'default': {
-		'ENGINE': 'django.db.backends.sqlite3',
-		'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+		'NAME': env('DB_DATABASE'),
 	},
+        
     
 	# TODO make it work with firebird (currently no Django 4 support)
 	# 'default': {

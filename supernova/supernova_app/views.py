@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import timezone
+
 from datetime import datetime
 import json
 import uuid
@@ -38,11 +40,14 @@ def api_v1_process_incoming_helium_packet(request):
 		return JsonResponse({'message': 'Invalid X-Helium-Secret header', 'value': secret_header}, status=403)
 
 	data = json.loads(request.body)
+
+	msg_received_time_utc = timezone.now()
 	
 	# Create RawRequestLog instance
 	raw_request_log = RawRequestLog(
 		request_uuid=uuid.uuid4(),
-		request_timestamp_utc=datetime.utcnow(),
+		request_timestamp_utc=msg_received_time_utc,
+		request_helium_integration_details = request.headers.get('X-Helium-Integration-Details'),
 		request_text=request.body.decode('utf-8')
 	)
 	raw_request_log.save()
@@ -50,7 +55,8 @@ def api_v1_process_incoming_helium_packet(request):
 	# Create PacketEvent instance
 	packet_event = PacketEvent(
 		request_uuid=raw_request_log,
-		request_timestamp_utc=datetime.utcnow(),
+		request_timestamp_utc=msg_received_time_utc,
+		request_helium_integration_details = request.headers.get('X-Helium-Integration-Details'),
 		app_eui=data['app_eui'],
 		dc_balance=data['dc']['balance'],
 		dc_nonce=data['dc']['nonce'],

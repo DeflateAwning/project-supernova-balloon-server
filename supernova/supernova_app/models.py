@@ -4,6 +4,7 @@ import uuid
 class RawRequestLog(models.Model):
 	request_uuid = models.UUIDField(primary_key=True)
 	request_timestamp_utc = models.DateTimeField()
+	request_helium_integration_details = models.CharField(max_length=255, null=True)
 	request_text = models.CharField(max_length=8000)
 
 	class Meta:
@@ -12,6 +13,7 @@ class RawRequestLog(models.Model):
 class PacketEvent(models.Model):
 	request_uuid = models.OneToOneField(RawRequestLog, primary_key=True, on_delete=models.CASCADE, db_column='request_uuid')
 	request_timestamp_utc = models.DateTimeField()
+	request_helium_integration_details = models.CharField(max_length=255, null=True)
 
 	app_eui = models.CharField(max_length=16)
 	dc_balance = models.IntegerField()

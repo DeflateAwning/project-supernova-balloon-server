@@ -21,11 +21,17 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/
 RUN mkdir -p /opt/app
 RUN mkdir -p /opt/app/supernova
 COPY requirements.txt start-server.sh /opt/app/
+RUN chmod +x /opt/app/start-server.sh
 COPY supernova /opt/app/supernova/
 WORKDIR /opt/app
+RUN chown -R www-data:www-data /opt/app
+
+# ignore warning after running pip as root (https://stackoverflow.com/a/72551258)
+ENV PIP_ROOT_USER_ACTION=ignore
+
+# install deps
 RUN pip install wheel
 RUN pip install -r requirements.txt
-RUN chown -R www-data:www-data /opt/app
 
 # start server
 EXPOSE 8020

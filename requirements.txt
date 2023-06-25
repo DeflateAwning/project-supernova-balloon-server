@@ -3,6 +3,7 @@ wheel
 django==4.2.2
 #django-firebird==2.2.1
 django-environ==0.10.0
+django-cron==0.6.0
 
 #git+https://github.com/NishiyamaPedro/django-firebird.git@e8c9acd#egg=django-firebird
 

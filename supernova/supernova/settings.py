@@ -19,14 +19,14 @@ import logging
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env(
-    SECRET_KEY=(str,),
-    DB_DATABASE=(str, ''),
-    DB_USER=(str, ''),
-    DB_PASSWORD=(str, ''),
-    DB_HOST=(str, ''),
-    DB_PORT=(int, 3050),
-    HELIUM_HEADER_SECRET=(str, ''),
-    DJANGO_DEBUG=(bool, False),
+	SECRET_KEY=(str,),
+	DB_DATABASE=(str, ''),
+	DB_USER=(str, ''),
+	DB_PASSWORD=(str, ''),
+	DB_HOST=(str, ''),
+	DB_PORT=(int, 3050),
+	HELIUM_HEADER_SECRET=(str, ''),
+	DJANGO_DEBUG=(bool, False),
 )
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
@@ -52,8 +52,9 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
-    'django.contrib.humanize',
-    'supernova_app',
+	'django.contrib.humanize',
+    'django_cron',
+	'supernova_app',
 ]
 
 MIDDLEWARE = [
@@ -84,6 +85,10 @@ TEMPLATES = [
 	},
 ]
 
+CRON_CLASSES = [
+	"supernova_app.cron.ReadUnreadPacketsCronJob.ReadUnreadPacketsCronJob",
+]
+
 WSGI_APPLICATION = 'supernova.wsgi.application'
 
 
@@ -97,19 +102,19 @@ DATABASES = {
 	# },
 
 	'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
+		'ENGINE': 'django.db.backends.mysql',
+		'HOST': env('DB_HOST'),
+		'PORT': env('DB_PORT'),
+		'USER': env('DB_USER'),
+		'PASSWORD': env('DB_PASSWORD'),
 		'NAME': env('DB_DATABASE'),
 	},
-        
-    
+		
+	
 	# TODO make it work with firebird (currently no Django 4 support)
 	# 'default': {
 	# 	'ENGINE': 'django.db.backends.firebird',
-    #     #'ENGINE': 'firebird',
+	#     #'ENGINE': 'firebird',
 	# 	'NAME': env('DB_DATABASE'),
 	# 	'USER': env('DB_USER'),
 	# 	'PASSWORD': env('DB_PASSWORD'),

@@ -19,15 +19,12 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/
 
 # copy source and install dependencies
 RUN mkdir -p /opt/app
-RUN mkdir -p /opt/app/pip_cache
 RUN mkdir -p /opt/app/supernova
 COPY requirements.txt start-server.sh /opt/app/
-COPY .pip_cache /opt/app/pip_cache/
 COPY supernova /opt/app/supernova/
 WORKDIR /opt/app
 RUN pip install wheel
 RUN pip install -r requirements.txt
-# --cache-dir /opt/app/pip_cache
 RUN chown -R www-data:www-data /opt/app
 
 # start server

@@ -10,3 +10,9 @@ django-cron==0.6.0
 gunicorn~=20.1.0
 
 mysqlclient~=2.2.0
+
+cstruct~=5.2
+
+# for jobs:
+loguru
+tqdm

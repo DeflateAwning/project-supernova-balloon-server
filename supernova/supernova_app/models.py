@@ -104,7 +104,7 @@ class PacketType1(models.Model):
 	gps_course_degrees = models.FloatField()
 
 	gps_satellite_count = models.PositiveIntegerField()
-	gps_hdop_m = models.IntegerField()
+	gps_hdop_m = models.FloatField()
 
 	gps_fix_date_epoch_time_sec = models.PositiveIntegerField()
 	gps_fix_date_age_ms = models.PositiveIntegerField()
@@ -135,7 +135,7 @@ class PacketType1(models.Model):
 				float bmp_temperature_c;
 				uint16_t battery_voltage_mv;
 				int8_t mcu_internal_temperature_c;
-				uint8_t is_switch_rtf; // TODO pack other bools in here, if we want
+				uint8_t is_switch_rtf;
 
 				// HERE is a good split if we ever wanted 2 different types of packets
 				int32_t gps_latitude_degrees_x1e6;
